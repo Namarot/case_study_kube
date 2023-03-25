@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  labels:
+    app: api
+data:
+  PG_DB: node_cs_db
+  PG_USER: namarot
+  PG_PASSWORD: "12345"
+  PG_HOST: postgres
