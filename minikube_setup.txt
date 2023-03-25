@@ -21,3 +21,5 @@ Get endpoint from https://my.webhookrelay.com/buckets
   helm repo add keel https://charts.keel.sh 
   helm repo update
   helm upgrade --install keel --namespace=push-workflow keel/keel --set helmProvider.enabled="false" --set service.enabled="true" --set service.type="ClusterIP"
+Get url to access api:
+  minikube service api -n push-workflow --url
