@@ -2,3 +2,5 @@ install minikube and kubectl
 Navigate to case_study_kube/. and run:
   minikube start
   kubectl apply -f .
+For rolling updates:
+  kubectl rollout restart deploy api
