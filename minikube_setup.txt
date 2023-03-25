@@ -1,6 +1,23 @@
-install minikube and kubectl
+Install minikube and kubectl
 Navigate to case_study_kube/. and run:
   minikube start
+  kubectl create namespace push-workflow
+  kubectl config set-context $(kubectl config current-context) --namespace=push-workflow
   kubectl apply -f .
 For rolling updates:
   kubectl rollout restart deploy api
+Setting up Keel and webhookrelay for Continous Deployment:
+Install helm
+  helm repo add webhookrelay https://charts.webhookrelay.com
+  helm repo update
+Create a webhookrelay token
+  export RELAY_KEY=****
+  export RELAY_SECRET=****
+  helm upgrade --install webhookrelay-operator --namespace=push-workflow webhookrelay/webhookrelay-operator \
+  --set credentials.key=$RELAY_KEY --set credentials.secret=$RELAY_SECRET
+
+  kubectl apply -f webhookrelay-cr.yaml
+Get endpoint from https://my.webhookrelay.com/buckets
+  helm repo add keel https://charts.keel.sh 
+  helm repo update
+  helm upgrade --install keel --namespace=push-workflow keel/keel --set helmProvider.enabled="false" --set service.enabled="true" --set service.type="ClusterIP"
