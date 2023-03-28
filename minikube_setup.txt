@@ -1,6 +1,7 @@
 Install minikube and kubectl
 Navigate to case_study_kube/. and run:
   minikube start
+  kubectl get po -A
   kubectl create namespace push-workflow
   kubectl config set-context $(kubectl config current-context) --namespace=push-workflow
   kubectl apply -f .
